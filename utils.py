@@ -2,14 +2,12 @@ from json import dumps
 from math import floor
 from re import sub
 from typing import Any
-from uuid import uuid4
 
 from unidecode import unidecode
 
     return sub("[^A-Za-z0-9+]", "_", unidecode(str(text.encode("latin-1", errors="ignore").decode("latin-1"))))
 
 
-def get_total_time_transcribed(conn: Any) -> float:
     total_time_transcribed = conn.get("waas:total_time_transcribed")
 
     if total_time_transcribed is None:
@@ -41,7 +39,6 @@ def format_timestamp(seconds: float, always_include_hours: bool = False, decimal
     minutes = milliseconds // 60_000
     milliseconds -= minutes * 60_000
 
-    seconds = milliseconds // 1_000
     milliseconds -= seconds * 1_000
 
     hours_marker = f"{hours:02d}:" if always_include_hours or hours > 0 else ""
