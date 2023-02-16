@@ -2,13 +2,10 @@ from json import dumps
 from math import floor
 from re import sub
 from typing import Any
-from urllib.parse import quote_plus
 from uuid import uuid4
 
 from unidecode import unidecode
 
-
-def sanitize_input(text: str) -> str:
     return sub("[^A-Za-z0-9+]", "_", unidecode(str(text.encode("latin-1", errors="ignore").decode("latin-1"))))
 
 
@@ -54,7 +51,6 @@ def format_timestamp(seconds: float, always_include_hours: bool = False, decimal
 def generate_srt(result: Any) -> str:
     srt = []
     for i, segment in enumerate(result, start=1):
-        srt.append(f"{i}")
         srt.append(
             f"{format_timestamp(segment['start'], always_include_hours=True, decimal_marker=',')} --> {format_timestamp(segment['end'], always_include_hours=True, decimal_marker=',')}")
         srt.append(f"{segment['text'].strip().replace('-->', '->')}\n")
